@@ -61,7 +61,4 @@ class PlantDiseaseDataset:
         self.class_names = list(train_generator.class_indices.keys())  
         self.nbr_classes = len(self.class_names)
 
-        print(f"Number of classes = {self.nbr_classes}")
-        print(f"Classes : {self.class_names}")
-
         return train_generator, val_generator
