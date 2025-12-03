@@ -1,0 +1,9 @@
+# dataset zip
+plant-disease-detection.zip
+
+# dataset folder 
+/plant-disease-detection/
+
+# env and pycache
+/plant_disease_env/
+/__pycache__/
