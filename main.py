@@ -1,8 +1,13 @@
 from data_preparation_and_exploration import PlantDiseaseDataset
-
-
+import tensorflow as tf
 
 def main():
-    prePros = PlantDiseaseDataset()
+    print("Tensorflow version:", tf.__version__)
+    DATASET_PATH = "/home/taher/Taher/Plant Disease Detection/plant-disease-detection"
+    prePros = PlantDiseaseDataset(DATASET_PATH, (224, 224), 32)
+    prePros.create_data_gen()
 
-main()
+
+
+if __name__ == "__main__":
+    main()

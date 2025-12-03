@@ -2,7 +2,7 @@ import os
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers, models, preprocessing
+from keras import layers, models, preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -29,7 +29,7 @@ class PlantDiseaseDataset:
             horizontal_flip=True, 
             fill_mode='nearest', 
             brightness_range=[0.6, 1.4],
-            channel_shift = 50.0,
+            channel_shift_range=50.0,  
             validation_split=0.2
         )
 
@@ -48,20 +48,20 @@ class PlantDiseaseDataset:
             seed = 42
         )
 
-        val_generator = val_datagen.image.ImageDataGenerator(
+        val_generator = val_datagen.flow_from_directory( 
             directory = os.path.join(self.data_path, 'Dataset'),
             target_size = self.image_size,
+            batch_size = self.batch_size,  
             class_mode = 'categorical',
             subset = 'validation',
             shuffle = False,
             seed = 42
         )
 
-        self.class_names = list(train_datagen.class_indices.keys())
+        self.class_names = list(train_generator.class_indices.keys())  
         self.nbr_classes = len(self.class_names)
 
         print(f"Number of classes = {self.nbr_classes}")
         print(f"Classes : {self.class_names}")
 
         return train_generator, val_generator
-
